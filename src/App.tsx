@@ -1,5 +1,13 @@
-import React from 'react';
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {
-  return <h1 className=' text-3xl font-bold underline'>Hello World</h1>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route />
+      </Routes>
+    </BrowserRouter>
+  )
 }
+

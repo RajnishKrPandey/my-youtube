@@ -9,8 +9,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/search' element={<Search />} />
         <Route path='/watch/:id' element={<Watch />} />
+        <Route path='/search' element={<Search />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Watch() {
+const Watch = () => {
   return (
     <div>Watch</div>
   )
 }
+
+export default Watch

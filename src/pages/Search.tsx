@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { useNavigate } from 'react-router-dom';
-import Card from '../components/Card';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Spinner from '../components/Spinner';
-import { clearVideos } from '../store';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { getHomePageVideos } from '../store/reducers/getHomePageVideos';
-import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos';
-import { HomePageVideos } from '../Types';
+import React, { useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import SearchCard from "../components/SearchCard";
+import Navbar from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import Spinner from "../components/Spinner";
+import { clearVideos } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { HomePageVideos } from "../Types";
+import { useNavigate } from "react-router-dom";
+import { getSearchPageVideos } from "../store/reducers/getSearchPageVideos";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(clearVideos());
-    if (searchTerm === '') navigate('/');
+    if (searchTerm === "") navigate("/");
     else {
       dispatch(getSearchPageVideos(false));
     }
@@ -27,31 +26,34 @@ const Search = () => {
 
   return (
     <div className="max-h-screen overflow-hidden">
-      <div style={{ height: '7.5vh' }}>
-        <Header />
+      <div style={{ height: "7.5vh" }}>
+        <Navbar />
       </div>
-      <div className="flex" style={{ height: '92.5vh' }}>
+      <div className="flex" style={{ height: "92.5vh" }}>
         <Sidebar />
         {videos.length ? (
-          <InfiniteScroll
-            dataLength={videos.length}
-            next={() => dispatch(getSearchPageVideos(true))}
-            hasMore={videos.length < 500}
-            loader={<Spinner />}
-            height={700}
-          >
-            <div className="grid gap-y-14 gap-x-8 grid-cols-4 p-8">
+          <div className="py-8 pl-8 flex flex-col gap-5 w-full">
+            <InfiniteScroll
+              dataLength={videos.length}
+              next={() => dispatch(getSearchPageVideos(true))}
+              hasMore={videos.length < 500}
+              loader={<Spinner />}
+              height={600}
+            >
               {videos.map((item: HomePageVideos) => {
-                return <Card data={item} key={item.videoId} />;
+                return (
+                  <div className="my-5">
+                    <SearchCard data={item} key={item.videoId} />
+                  </div>
+                );
               })}
-            </div>
-          </InfiniteScroll>
+            </InfiniteScroll>
+          </div>
         ) : (
           <Spinner />
         )}
       </div>
     </div>
   );
-};
-
+}
 export default Search;

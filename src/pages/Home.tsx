@@ -38,7 +38,7 @@ const Home = () => {
             </div>
           </InfiniteScroll>
         ) : (
-          <Spinner />
+          <Spinner /> 
         )}
       </div>
     </div>
